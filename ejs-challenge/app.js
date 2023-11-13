@@ -72,9 +72,6 @@ app.get("/posts/:name",function(req,res){
   // var term = req.params.name;
   // for(var i=0;i<posts.length;i++){
   //   if(lodash.lowerCase(posts[i].title) === lodash.lowerCase(term)){
-
-
-
   //     res.render("post",{
   //       title : posts[i].title,
   //       content : posts[i].content
@@ -84,12 +81,15 @@ app.get("/posts/:name",function(req,res){
 
   const reqBlog = req.params.name;
   console.log(reqBlog)
-  Blog.findOne({_id : reqBlog},function(err,results){
+  Blog.findOne({title : reqBlog},function(err,results){
       if( !err ){
           res.render("post",{
                   title : results.title,
                   content : results.content
                 });
+      }
+      else{
+        console.log(err);
       }
   });
 });
@@ -109,3 +109,7 @@ app.get("/posts/:name",function(req,res){
 app.listen(3000, function() {
   console.log("Server started on port 3000");
 });
+
+
+
+
